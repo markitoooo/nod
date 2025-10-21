@@ -89,7 +89,7 @@
             height: 100%;
             width: 0%;
             background: #fff;
-            animation: load 2s ease-in-out forwards;
+            animation: load 3s ease-in-out forwards;
         }
         
         @keyframes load {
@@ -1457,25 +1457,24 @@
     </div>
 
     <script>
-        // "NOD" translations in different languages for the loading animation
+        // "NOD" translations for head movement in different languages
         const translations = [
-            { text: 'ΝΟΔ', lang: 'Greek' }, // Greek
-            { text: 'NODO', lang: 'Spanish' }, // Spanish
-            { text: '点头', lang: 'Chinese' }, // Chinese
-            { text: 'うなずき', lang: 'Japanese' }, // Japanese
-            { text: 'HOOFDKNIK', lang: 'Dutch' }, // Dutch
-            { text: 'NICKEN', lang: 'German' }, // German
-            { text: 'HOCQUET', lang: 'French' }, // French
-            { text: 'CENNO', lang: 'Italian' }, // Italian
-            { text: 'ACENO', lang: 'Portuguese' }, // Portuguese
-            { text: 'КИВОК', lang: 'Russian' }, // Russian
-            { text: 'NOD', lang: 'English' } // English - final one
+            { text: 'Νεύμα', lang: 'Greek' }, // Greek - head nod
+            { text: 'Asentimiento', lang: 'Spanish' }, // Spanish - nod/agreement
+            { text: '点头', lang: 'Chinese' }, // Chinese - head nod
+            { text: '頷き', lang: 'Japanese' }, // Japanese - nod
+            { text: 'Hochement', lang: 'French' }, // French - nod
+            { text: 'Cenno', lang: 'Italian' }, // Italian - nod/gesture
+            { text: 'Nicken', lang: 'German' }, // German - to nod
+            { text: 'Aceno', lang: 'Portuguese' }, // Portuguese - nod
+            { text: 'Кивок', lang: 'Russian' }, // Russian - nod
+            { text: 'NOD', lang: 'English' } // Final - English
         ];
 
         let currentTranslationIndex = 0;
         const loadingLogo = document.getElementById('loading-logo');
         
-        // Start translation cycling
+        // Start translation cycling - SLOWER timing (500ms instead of 200ms)
         const translationInterval = setInterval(() => {
             loadingLogo.textContent = translations[currentTranslationIndex].text;
             currentTranslationIndex++;
@@ -1487,7 +1486,7 @@
                     startLogoTransition();
                 }, 1000);
             }
-        }, 200); // Change translation every 200ms
+        }, 500); // Changed from 200ms to 500ms for slower animation
 
         // Logo transition function
         function startLogoTransition() {
@@ -1510,7 +1509,7 @@
             clone.style.webkitTextStroke = '2px #fff';
             clone.style.textStroke = '2px #fff';
             clone.style.fontSize = window.getComputedStyle(loadingLogo).fontSize;
-            clone.style.fontFamily = window.getComputedStyle(loadingLogo).fontFamily;
+            clone.style.fontFamily = 'TAN Nimbus, serif';
             clone.style.letterSpacing = window.getComputedStyle(loadingLogo).letterSpacing;
             clone.style.zIndex = '10000';
             clone.style.textAlign = 'center';
@@ -1536,7 +1535,7 @@
                 clone.style.webkitTextStroke = '0';
                 clone.style.textStroke = '0';
                 clone.style.fontSize = heroStyles.fontSize;
-                clone.style.fontFamily = heroStyles.fontFamily;
+                clone.style.fontFamily = 'TAN Nimbus, serif';
                 clone.style.letterSpacing = heroStyles.letterSpacing;
                 clone.textContent = 'NOD'; // Ensure it says NOD
             }, 50);
