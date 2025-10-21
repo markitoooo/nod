@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOD - A Private Escape by the Sea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background-color: #000;
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        @font-face {
+            font-family: 'TAN Nimbus';
+            src: url('https://fonts.cdnfonts.com/css/tan-nimbus') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Layout */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'TAN Nimbus', serif;
+            font-size: 2rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+        
+        .book-btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .book-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-family: 'TAN Nimbus', serif;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Booking Overlay */
+        .booking-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .booking-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .booking-form {
+            background: #000;
+            border: 1px solid #fff;
+            padding: 3rem;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .close-booking {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        .check-availability {
+            width: 100%;
+            padding: 1rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .check-availability:hover {
+            background: #ddd;
+        }
+        
+        /* About Section */
+        .about {
+            background: #000;
+            padding: 8rem 2rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 500px;
+            background: #333;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .about-text h2 {
+            font-family: 'TAN Nimbus', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Suites Section */
+        .suites {
+            background: #000;
+            padding: 6rem 2rem;
+        }
+        
+        .suites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .suite-card {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+            background: #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .suite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .suite-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .suite-card:hover .suite-image {
+            transform: scale(1.05);
+        }
+        
+        .suite-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        }
+        
+        .suite-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .view-suite {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 2px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .view-suite:hover {
+            opacity: 0.7;
+        }
+        
+        /* Experience Section */
+        .experience {
+            background: #000;
+            padding: 8rem 2rem;
+        }
+        
+        .experience-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .experience-image {
+            width: 100%;
+            height: 500px;
+            background: #333;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .experience-text h2 {
+            font-family: 'TAN Nimbus', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background: #000;
+            padding: 6rem 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            background: #333;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: #000;
+            padding: 6rem 2rem;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .map {
+            height: 400px;
+            background: #333;
+        }
+        
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid #333;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: #fff;
+            font-size: 1.2rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            opacity: 0.7;
+        }
+        
+        .copyright {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content, .experience-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .about-image, .experience-image {
+                height: 400px;
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .suites-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            section {
+                padding: 4rem 1rem;
+            }
+            
+            .hero {
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about, .experience {
+                padding: 4rem 1rem;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">NOD</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#suites">Suites</a></li>
+                <li><a href="#experience">Experiences</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="book-btn" id="open-booking">Book Now</button></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-coming-to-the-beach-5016-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <h1 class="fade-in">NOD</h1>
+            <p class="fade-in">A Private Escape by the Sea</p>
+            <button class="book-btn fade-in" id="hero-book-btn">Book Your Stay</button>
+        </div>
+    </section>
+
+    <!-- Booking Overlay -->
+    <div class="booking-overlay" id="booking-overlay">
+        <div class="booking-form">
+            <button class="close-booking" id="close-booking">&times;</button>
+            <h3>Check Availability</h3>
+            <div class="form-group">
+                <label for="check-in">Check In</label>
+                <input type="date" id="check-in" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="check-out">Check Out</label>
+                <input type="date" id="check-out" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="guests">Guests</label>
+                <select id="guests" class="form-control">
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                </select>
+            </div>
+            <button class="check-availability">Check Availability</button>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="about-text fade-in">
+                    <h2>NOD</h2>
+                    <p>An exclusive sanctuary where the sea meets serenity. NOD offers an intimate escape with just six meticulously designed seafront suites, each featuring private dipping pools and uninterrupted ocean views.</p>
+                    <p>Our philosophy is simple: provide unparalleled privacy, personalized service, and moments of pure tranquility. At NOD, every detail is curated to create an experience that resonates with your soul.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suites Section -->
+    <section class="suites" id="suites">
+        <div class="container">
+            <h2 class="fade-in">Our Suites</h2>
+            <div class="suites-grid">
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Ocean Vista Suite</h3>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1582582621959-48d27397dc69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Horizon Suite</h3>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Sunset Pavilion</h3>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Azure Retreat</h3>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Tidal Haven</h3>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Coastal Sanctuary</h3>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="experience-content">
+                <div class="experience-text fade-in">
+                    <h2>Experiences</h2>
+                    <p>At NOD, we curate moments that linger in memory long after your stay. From private dining under the stars to bespoke wellness journeys, every experience is tailored to your desires.</p>
+                    <p>Our ocean-inspired spa treatments harness the healing power of the sea, while our culinary team crafts exquisite meals using locally sourced ingredients. Whether you seek adventure or tranquility, NOD provides the canvas for your perfect escape.</p>
+                </div>
+                <div class="experience-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="fade-in">Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1596394516093-9ba7a4c84c58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-lightbox">&times;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image">
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="fade-in">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-form fade-in">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" rows="5"></textarea>
+                    </div>
+                    <button class="check-availability">Send Message</button>
+                </div>
+                <div class="map fade-in">
+                    <!-- In a real implementation, this would be a Google Maps embed -->
+                    <div style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center;">
+                        <p>Map Location</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="logo">NOD</a>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NOD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Booking overlay functionality
+        const openBookingBtn = document.getElementById('open-booking');
+        const heroBookBtn = document.getElementById('hero-book-btn');
+        const closeBookingBtn = document.getElementById('close-booking');
+        const bookingOverlay = document.getElementById('booking-overlay');
+
+        function openBooking() {
+            bookingOverlay.classList.add('active');
+        }
+
+        function closeBooking() {
+            bookingOverlay.classList.remove('active');
+        }
+
+        openBookingBtn.addEventListener('click', openBooking);
+        heroBookBtn.addEventListener('click', openBooking);
+        closeBookingBtn.addEventListener('click', closeBooking);
+
+        // Close booking overlay when clicking outside
+        bookingOverlay.addEventListener('click', function(e) {
+            if (e.target === bookingOverlay) {
+                closeBooking();
+            }
+        });
+
+        // Lightbox functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.querySelector('.lightbox-image');
+        const closeLightbox = document.querySelector('.close-lightbox');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imageUrl = this.style.backgroundImage.slice(5, -2);
+                lightboxImage.src = imageUrl;
+                lightbox.classList.add('active');
+            });
+        });
+
+        closeLightbox.addEventListener('click', function() {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        function checkScroll() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('appear');
+                }
+            });
+        }
+
+        // Initial check
+        checkScroll();
+
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
