@@ -123,7 +123,7 @@
             z-index: 1001;
         }
         
-        /* Vertical Logo */
+        /* Vertical Logo - Updated to not appear in header or footer */
         .vertical-logo {
             position: fixed;
             left: 2rem;
@@ -795,7 +795,7 @@
     </style>
 </head>
 <body>
-    <!-- Vertical Logo -->
+    <!-- Vertical Logo - Will be positioned correctly with JavaScript -->
     <a href="#" class="vertical-logo logo-font">NOD</a>
 
     <!-- Header & Navigation -->
@@ -830,6 +830,112 @@
             <button class="explore-btn fade-in" id="open-booking">Check Availability</button>
         </div>
     </section>
+
+    <!-- Spa Section -->
+    <section class="two-col-section" id="spa">
+        <div class="container">
+            <div class="two-col-content">
+                <div class="section-image fade-in" style="background-image: url('spa.png');"></div>
+                <div class="section-text fade-in">
+                    <h2>In-Room Spa & Dining</h2>
+                    <p>Experience ultimate relaxation with our exclusive in-room spa services. Our skilled therapists bring the spa experience directly to your suite, offering a range of treatments designed to rejuvenate mind and body.</p>
+                    <p>Complement your relaxation with our gourmet in-room dining. Our chefs craft exquisite meals using locally-sourced ingredients, delivering a culinary journey that satisfies all your senses without ever leaving your private sanctuary.</p>
+                    <button class="explore-btn">Explore Services</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suites Section -->
+    <section class="suites" id="suites">
+        <div class="container">
+            <h2 class="fade-in" style="text-align: center; margin-bottom: 4rem;">Luxury Suites</h2>
+            <div class="suites-grid">
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('room2.png');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Ocean Vista Suite</h3>
+                        <p class="suite-description">Panoramic ocean views with a spacious terrace and private infinity pool.</p>
+                        <a href="suite-ocean-vista.html" class="view-suite" target="_blank">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('room3.png');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Horizon Suite</h3>
+                        <p class="suite-description">Direct beach access with sunset views and a secluded garden.</p>
+                        <a href="suite-horizon.html" class="view-suite" target="_blank">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('room4.png');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Sunset Pavilion</h3>
+                        <p class="suite-description">Open-air living space with 180-degree ocean vistas.</p>
+                        <a href="suite-sunset.html" class="view-suite" target="_blank">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('room5.png');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Serenity Suite</h3>
+                        <p class="suite-description">Tranquil retreat with private meditation garden and outdoor shower.</p>
+                        <a href="suite-serenity.html" class="view-suite" target="_blank">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('room6.png');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Tranquility Villa</h3>
+                        <p class="suite-description">Secluded villa with private pool and direct beach access.</p>
+                        <a href="suite-tranquility.html" class="view-suite" target="_blank">View Suite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo logo-font">NOD</a>
+                    <p>An exclusive sanctuary where the sea meets serenity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Explore</h3>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#spa">Spa & Dining</a></li>
+                            <li><a href="#suites">Suites</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Information</h3>
+                        <ul>
+                            <li><a href="#wellness">Wellness</a></li>
+                            <li><a href="#experiences">Experiences</a></li>
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NOD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Booking System Overlay -->
     <div class="booking-overlay" id="booking-overlay">
@@ -919,6 +1025,16 @@
                             <p>Open-air living space with 180-degree ocean vistas</p>
                             <p class="suite-price">$1,100 per night</p>
                         </div>
+                        <div class="suite-option" data-suite="serenity">
+                            <h4>Serenity Suite</h4>
+                            <p>Tranquil retreat with private meditation garden</p>
+                            <p class="suite-price">$1,250 per night</p>
+                        </div>
+                        <div class="suite-option" data-suite="tranquility">
+                            <h4>Tranquility Villa</h4>
+                            <p>Secluded villa with private pool and beach access</p>
+                            <p class="suite-price">$1,500 per night</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -1002,98 +1118,6 @@
         </div>
     </div>
 
-    <!-- Rest of the page content remains the same -->
-    <!-- About Section -->
-    <section class="two-col-section" id="about">
-        <div class="container">
-            <div class="two-col-content">
-                <div class="section-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
-                <div class="section-text fade-in">
-                    <h2>A Private Coastal Sanctuary</h2>
-                    <p>NOD offers an intimate escape with just six meticulously designed seafront suites, each featuring private dipping pools and uninterrupted ocean views. Our philosophy is simple: provide unparalleled privacy, personalized service, and moments of pure tranquility.</p>
-                    <p>At NOD, every detail is curated to create an experience that resonates with your soul. From the architecture that harmonizes with the coastal landscape to the bespoke amenities that anticipate your every need.</p>
-                    <button class="explore-btn">Explore</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Suites Section -->
-    <section class="suites" id="suites">
-        <div class="container">
-            <h2 class="fade-in" style="text-align: center; margin-bottom: 4rem;">Luxury Suites</h2>
-            <div class="suites-grid">
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Ocean Vista Suite</h3>
-                        <p class="suite-description">Panoramic ocean views with a spacious terrace and private infinity pool.</p>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1582582621959-48d27397dc69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Horizon Suite</h3>
-                        <p class="suite-description">Direct beach access with sunset views and a secluded garden.</p>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Sunset Pavilion</h3>
-                        <p class="suite-description">Open-air living space with 180-degree ocean vistas.</p>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <a href="#" class="footer-logo logo-font">NOD</a>
-                    <p>An exclusive sanctuary where the sea meets serenity.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h3>Explore</h3>
-                        <ul>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#suites">Suites</a></li>
-                            <li><a href="#dining">Dining</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>Information</h3>
-                        <ul>
-                            <li><a href="#wellness">Wellness</a></li>
-                            <li><a href="#experiences">Experiences</a></li>
-                            <li><a href="#gallery">Gallery</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>Legal</h3>
-                        <ul>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Cookie Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 NOD. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
@@ -1103,7 +1127,33 @@
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            // Control vertical logo visibility
+            controlVerticalLogo();
         });
+
+        // Control vertical logo position and visibility
+        function controlVerticalLogo() {
+            const verticalLogo = document.querySelector('.vertical-logo');
+            const hero = document.querySelector('.hero');
+            const footer = document.querySelector('footer');
+            
+            const heroBottom = hero.offsetTop + hero.offsetHeight;
+            const footerTop = footer.offsetTop;
+            const currentScroll = window.scrollY + window.innerHeight;
+            
+            // Hide logo in hero and footer sections
+            if (window.scrollY < heroBottom || currentScroll > footerTop) {
+                verticalLogo.style.opacity = '0';
+                verticalLogo.style.pointerEvents = 'none';
+            } else {
+                verticalLogo.style.opacity = '1';
+                verticalLogo.style.pointerEvents = 'auto';
+            }
+        }
+
+        // Initialize vertical logo position
+        controlVerticalLogo();
 
         // Booking overlay functionality
         const openBookingBtn = document.getElementById('open-booking');
@@ -1225,6 +1275,8 @@
             if (selectedSuite === 'ocean-vista') price = 850;
             if (selectedSuite === 'horizon') price = 950;
             if (selectedSuite === 'sunset') price = 1100;
+            if (selectedSuite === 'serenity') price = 1250;
+            if (selectedSuite === 'tranquility') price = 1500;
             
             const total = nights * price;
             document.getElementById('confirm-total').textContent = `$${total} (${nights} nights)`;
