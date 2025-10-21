@@ -129,30 +129,6 @@
             opacity: 0.7;
         }
         
-        .logo {
-            font-size: 1.8rem;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 3px;
-        }
-        
-        .book-btn {
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 0.7rem 1.8rem;
-            font-size: 0.85rem;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-        
-        .book-btn:hover {
-            background: #fff;
-            color: #000;
-        }
-        
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
@@ -160,7 +136,26 @@
             z-index: 1001;
         }
         
-        /* Hero Section - One&Only Style */
+        /* Vertical Logo */
+        .vertical-logo {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            z-index: 999;
+            font-size: 2.5rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 3px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .vertical-logo:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section - With Booking System */
         .hero {
             height: 100vh;
             display: flex;
@@ -177,7 +172,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1597074866923-dc0589150358?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -220,6 +215,114 @@
         .explore-btn:hover {
             background: #fff;
             color: #000;
+        }
+        
+        /* Booking System Overlay */
+        .booking-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .booking-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .booking-system {
+            background: #000;
+            border: 1px solid #fff;
+            padding: 3rem;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .close-booking {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .close-booking:hover {
+            opacity: 0.7;
+        }
+        
+        .booking-system h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #aaa;
+        }
+        
+        .check-availability {
+            width: 100%;
+            padding: 1.2rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            grid-column: 1 / -1;
+        }
+        
+        .check-availability:hover {
+            background: #ddd;
         }
         
         /* Two Column Section - One&Only Style */
@@ -464,29 +567,6 @@
             margin-bottom: 2rem;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 1rem;
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #aaa;
-        }
-        
         .submit-btn {
             background: #fff;
             color: #000;
@@ -590,78 +670,6 @@
             letter-spacing: 1px;
         }
         
-        /* Booking Overlay */
-        .booking-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-        
-        .booking-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .booking-form {
-            background: #000;
-            border: 1px solid #fff;
-            padding: 3rem;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-        }
-        
-        .close-booking {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-        
-        .close-booking:hover {
-            opacity: 0.7;
-        }
-        
-        .booking-form h3 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-            text-align: center;
-        }
-        
-        .check-availability {
-            width: 100%;
-            padding: 1.2rem;
-            background: #fff;
-            color: #000;
-            border: none;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-        
-        .check-availability:hover {
-            background: #ddd;
-        }
-        
         /* Responsive Design */
         @media (max-width: 1200px) {
             .two-col-content {
@@ -696,6 +704,11 @@
                 width: 100%;
                 justify-content: space-between;
             }
+            
+            .vertical-logo {
+                left: 1rem;
+                font-size: 2rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -727,6 +740,14 @@
                 flex-direction: column;
                 gap: 2rem;
             }
+            
+            .vertical-logo {
+                display: none;
+            }
+            
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 576px) {
@@ -745,6 +766,10 @@
             .two-col-section, .contact {
                 padding: 5rem 1rem;
             }
+            
+            .booking-system {
+                padding: 2rem;
+            }
         }
         
         /* Animation Classes */
@@ -761,6 +786,9 @@
     </style>
 </head>
 <body>
+    <!-- Vertical Logo -->
+    <a href="#" class="vertical-logo logo-font">NOD</a>
+
     <!-- Header & Navigation -->
     <header id="header">
         <nav>
@@ -768,10 +796,10 @@
                 <a href="#" class="resorts-link">Resorts</a>
             </div>
             <div class="nav-center">
-                <a href="#" class="logo logo-font">NOD</a>
+                <!-- Logo removed from header as requested -->
             </div>
             <div class="nav-right">
-                <button class="book-btn" id="open-booking">Book Now</button>
+                <!-- Book Now button removed as requested -->
             </div>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
@@ -785,9 +813,54 @@
         <div class="hero-content">
             <h1 class="fade-in logo-font">NOD</h1>
             <p class="fade-in">A Private Escape by the Sea</p>
-            <button class="explore-btn fade-in">Explore</button>
+            <button class="explore-btn fade-in" id="open-booking">Check Availability</button>
         </div>
     </section>
+
+    <!-- Booking System Overlay -->
+    <div class="booking-overlay" id="booking-overlay">
+        <div class="booking-system">
+            <button class="close-booking" id="close-booking">&times;</button>
+            <h3>Book Your Stay</h3>
+            <div class="booking-form">
+                <div class="form-group">
+                    <label for="check-in">Check In</label>
+                    <input type="date" id="check-in" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check Out</label>
+                    <input type="date" id="check-out" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <select id="guests" class="form-control">
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="suite-type">Suite Type</label>
+                    <select id="suite-type" class="form-control">
+                        <option value="ocean-vista">Ocean Vista Suite</option>
+                        <option value="horizon">Horizon Suite</option>
+                        <option value="sunset">Sunset Pavilion</option>
+                        <option value="azure">Azure Retreat</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="promo-code">Promo Code</label>
+                    <input type="text" id="promo-code" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="special-requests">Special Requests</label>
+                    <textarea id="special-requests" class="form-control" rows="2"></textarea>
+                </div>
+                <button class="check-availability">Check Availability</button>
+            </div>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section class="two-col-section" id="about">
@@ -984,32 +1057,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Booking Overlay -->
-    <div class="booking-overlay" id="booking-overlay">
-        <div class="booking-form">
-            <button class="close-booking" id="close-booking">&times;</button>
-            <h3>Check Availability</h3>
-            <div class="form-group">
-                <label for="check-in">Check In</label>
-                <input type="date" id="check-in" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="check-out">Check Out</label>
-                <input type="date" id="check-out" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="guests">Guests</label>
-                <select id="guests" class="form-control">
-                    <option value="1">1 Guest</option>
-                    <option value="2">2 Guests</option>
-                    <option value="3">3 Guests</option>
-                    <option value="4">4 Guests</option>
-                </select>
-            </div>
-            <button class="check-availability">Check Availability</button>
-        </div>
-    </div>
 
     <script>
         // Header scroll effect
