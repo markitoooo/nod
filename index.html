@@ -155,7 +155,7 @@
             opacity: 0.8;
         }
         
-        /* Hero Section - With Video Background */
+        /* Hero Section with Vimeo Video */
         .hero {
             height: 100vh;
             display: flex;
@@ -166,14 +166,28 @@
             overflow: hidden;
         }
         
-        .hero-video {
+        .vimeo-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: -1;
+        }
+        
+        .vimeo-wrapper {
+            padding: 56.25% 0 0 0; /* 16:9 aspect ratio */
+            position: relative;
+            width: 100%;
+            height: 0;
+        }
+        
+        .vimeo-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
         
         .video-overlay {
@@ -815,12 +829,13 @@
         </nav>
     </header>
 
-    <!-- Hero Section with Video Background -->
+    <!-- Hero Section with Vimeo Video -->
     <section class="hero" id="home">
-        <video autoplay muted loop class="hero-video">
-            <source src="video-nod-1st.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <div class="vimeo-container">
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/1129188827?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;background=1&amp;autoplay=1&amp;loop=1&amp;muted=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="video nod 1sst"></iframe>
+            </div>
+        </div>
         <div class="video-overlay"></div>
         <div class="hero-content">
             <h1 class="fade-in logo-font">NOD</h1>
@@ -1070,6 +1085,9 @@
         </div>
     </footer>
 
+    <!-- Vimeo Player API Script -->
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
     <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
@@ -1152,8 +1170,17 @@
 
         // Check on scroll
         window.addEventListener('scroll', checkScroll);
+
+        // Vimeo player setup for autoplay and looping
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('.vimeo-wrapper iframe');
+            const player = new Vimeo.Player(iframe);
+            
+            player.setVolume(0); // Ensure muted
+            player.play().catch(function(error) {
+                console.log('Vimeo autoplay prevented:', error);
+            });
+        });
     </script>
 </body>
 </html>
-
-<div style="padding:75% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1129188827?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="video nod 1sst"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
