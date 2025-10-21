@@ -26,8 +26,17 @@
             font-weight: 400;
         }
         
+        /* TAN Nimbus Font - RESTORED */
+        @font-face {
+            font-family: 'TAN Nimbus';
+            src: url('tan-nimbus.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         .logo-font {
-            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-family: 'TAN Nimbus', serif;
             font-weight: normal;
             letter-spacing: 2px;
         }
@@ -55,7 +64,7 @@
             letter-spacing: 0.5px;
         }
         
-        /* Loading Animation - FIXED */
+        /* PROPER Loading Animation */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -90,48 +99,38 @@
             font-size: 8rem;
             color: transparent;
             -webkit-text-stroke: 2px #fff;
+            text-stroke: 2px #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Playfair Display', serif;
+            font-family: 'TAN Nimbus', serif;
             letter-spacing: 3px;
+            z-index: 2;
         }
         
-        .logo-fill {
+        .water-fill {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 0%;
+            background: linear-gradient(to top, #1a6ea0, #0a3d62);
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Playfair Display" font-size="120" fill="white">NOD</text></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Playfair Display" font-size="120" fill="white">NOD</text></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            animation: waterFill 2.5s ease-in-out forwards;
             overflow: hidden;
-            animation: fillWater 2.5s ease-in-out forwards;
         }
         
-        .logo-fill::before {
-            content: 'NOD';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            font-size: 8rem;
-            background: linear-gradient(to bottom, #1a6ea0, #0a3d62);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            letter-spacing: 3px;
-        }
-        
-        @keyframes fillWater {
+        @keyframes waterFill {
             0% { height: 0%; }
             100% { height: 100%; }
         }
         
-        .bubbles {
+        .bubbles-container {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -142,26 +141,27 @@
         
         .bubble {
             position: absolute;
-            bottom: -10px;
-            background: rgba(255, 255, 255, 0.3);
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
-            animation: bubbleRise 2s infinite ease-in;
+            animation: bubbleRise 3s infinite ease-in;
         }
         
         @keyframes bubbleRise {
             0% {
-                transform: translateY(0) scale(0);
+                transform: translateY(0) scale(0.5);
                 opacity: 0;
             }
-            50% {
+            20% {
                 opacity: 0.8;
             }
             100% {
-                transform: translateY(-100px) scale(1);
+                transform: translateY(-200px) scale(1.2);
                 opacity: 0;
             }
         }
         
+        /* Rest of your original CSS remains exactly the same */
         section {
             padding: 6rem 2rem;
             position: relative;
@@ -1025,7 +1025,7 @@
                 height: 150px;
             }
             
-            .logo-outline, .logo-fill::before {
+            .logo-outline {
                 font-size: 6rem;
             }
         }
@@ -1043,12 +1043,12 @@
     </style>
 </head>
 <body>
-    <!-- Loading Animation - FIXED -->
+    <!-- PROPER Loading Animation -->
     <div class="loading-screen" id="loading-screen">
         <div class="logo-container">
             <div class="logo-outline logo-font">NOD</div>
-            <div class="logo-fill"></div>
-            <div class="bubbles" id="bubbles"></div>
+            <div class="water-fill"></div>
+            <div class="bubbles-container" id="bubbles-container"></div>
         </div>
     </div>
 
@@ -1087,7 +1087,6 @@
                 <div class="section-text fade-in">
                     <h2>In-Room Spa Services</h2>
                     <p>Experience ultimate relaxation with our exclusive in-room spa services. Our skilled therapists bring the spa experience directly to your suite, offering a range of treatments designed to rejuvenate mind and body.</p>
-                    <p>From therapeutic massages to revitalizing facials, our treatments are tailored to your preferences, ensuring complete privacy and comfort in your personal sanctuary.</p>
                     <button class="explore-btn" id="open-spa-modal">Explore Services</button>
                 </div>
             </div>
@@ -1210,7 +1209,7 @@
         </div>
     </div>
 
-    <!-- Spa Modal - FIXED (Dining removed) -->
+    <!-- Spa Modal - Dining removed -->
     <div class="spa-modal" id="spa-modal">
         <div class="spa-modal-content">
             <button class="close-modal">&times;</button>
@@ -1239,7 +1238,7 @@
         </div>
     </div>
 
-    <!-- Booking System - FIXED -->
+    <!-- Booking System -->
     <div class="booking-overlay" id="booking-overlay">
         <div class="booking-system">
             <button class="close-booking" id="close-booking">&times;</button>
@@ -1416,17 +1415,19 @@
     </div>
 
     <script>
-        // Loading Animation - FIXED
+        // PROPER Loading Animation
         window.addEventListener('load', function() {
-            // Create bubbles
-            const bubblesContainer = document.getElementById('bubbles');
-            for (let i = 0; i < 20; i++) {
+            const bubblesContainer = document.getElementById('bubbles-container');
+            
+            // Create realistic bubbles
+            for (let i = 0; i < 25; i++) {
                 const bubble = document.createElement('div');
                 bubble.className = 'bubble';
                 bubble.style.left = Math.random() * 100 + '%';
-                bubble.style.width = Math.random() * 10 + 5 + 'px';
+                bubble.style.width = Math.random() * 15 + 5 + 'px';
                 bubble.style.height = bubble.style.width;
                 bubble.style.animationDelay = Math.random() * 2 + 's';
+                bubble.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 bubblesContainer.appendChild(bubble);
             }
             
@@ -1435,7 +1436,7 @@
             }, 3000);
         });
 
-        // Suite data
+        // Rest of your original JavaScript remains exactly the same
         const suiteData = {
             'ocean-vista': {
                 title: 'Ocean Vista Suite',
@@ -1586,7 +1587,6 @@
             controlVerticalLogo();
         });
 
-        // Control vertical logo position
         function controlVerticalLogo() {
             const verticalLogo = document.querySelector('.vertical-logo');
             const hero = document.querySelector('.hero');
@@ -1707,7 +1707,7 @@
             }
         });
 
-        // Booking overlay functionality - FIXED
+        // Booking overlay functionality
         const openBookingBtn = document.getElementById('open-booking');
         const closeBookingBtn = document.getElementById('close-booking');
         const bookingOverlay = document.getElementById('booking-overlay');
