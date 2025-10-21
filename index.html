@@ -6,6 +6,15 @@
     <title>NOD - A Private Escape by the Sea</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -29,7 +38,7 @@
         /* TAN Nimbus Font */
         @font-face {
             font-family: 'TAN Nimbus';
-            src: url('tan-nimbus.woff') format('woff');
+            src: url('https://fonts.cdnfonts.com/s/85549/TAN-NIMBUS.woff') format('woff');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -878,7 +887,8 @@
             position: fixed;
             z-index: 10000;
             pointer-events: none;
-            transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, top, left, width, height, font-size;
         }
 
         /* Mobile-specific styles */
@@ -997,6 +1007,10 @@
             .vertical-logo {
                 display: none;
             }
+            
+            .logo-outline {
+                font-size: 5rem;
+            }
         }
         
         @media (max-width: 1200px) {
@@ -1069,7 +1083,7 @@
             }
             
             .logo-outline {
-                font-size: 6rem;
+                font-size: 4rem;
             }
             
             .loading-bar-container {
@@ -1452,18 +1466,17 @@
     </div>
 
     <script>
-        // Font cycling for loading screen
+        // Premium hotel-style fonts for the font cycling
         const fonts = [
-            'Arial, sans-serif',
-            'Georgia, serif',
-            'Verdana, sans-serif',
-            'Times New Roman, serif',
-            'Courier New, monospace',
-            'Impact, sans-serif',
-            'Trebuchet MS, sans-serif',
-            'Comic Sans MS, cursive',
-            'Palatino Linotype, serif',
-            'Lucida Sans Unicode, sans-serif',
+            'Cormorant Garamond, serif',
+            'Playfair Display, serif',
+            'Bodoni Moda, serif',
+            'EB Garamond, serif',
+            'Cinzel, serif',
+            'Libre Baskerville, serif',
+            'Marcellus, serif',
+            'Abril Fatface, cursive',
+            'Old Standard TT, serif',
             'TAN Nimbus, serif' // Final font
         ];
 
@@ -1477,10 +1490,12 @@
             
             if (currentFontIndex >= fonts.length) {
                 clearInterval(fontInterval);
-                // Once font cycling is done, start the logo transition
-                startLogoTransition();
+                // Once font cycling is done, pause for 1 second then start the logo transition
+                setTimeout(() => {
+                    startLogoTransition();
+                }, 1000);
             }
-        }, 180); // Change font every 180ms
+        }, 200); // Change font every 200ms
 
         // Logo transition function
         function startLogoTransition() {
@@ -1494,8 +1509,8 @@
             clone.id = 'logo-clone';
             clone.classList.add('logo-transition');
             clone.style.position = 'fixed';
-            clone.style.top = `${loadingRect.top}px`;
-            clone.style.left = `${loadingRect.left}px`;
+            clone.style.top = `${loadingRect.top + window.scrollY}px`;
+            clone.style.left = `${loadingRect.left + window.scrollX}px`;
             clone.style.width = `${loadingRect.width}px`;
             clone.style.height = `${loadingRect.height}px`;
             clone.style.margin = '0';
@@ -1506,6 +1521,8 @@
             clone.style.fontFamily = window.getComputedStyle(loadingLogo).fontFamily;
             clone.style.letterSpacing = window.getComputedStyle(loadingLogo).letterSpacing;
             clone.style.zIndex = '10000';
+            clone.style.textAlign = 'center';
+            clone.style.lineHeight = '1';
             
             // Add the clone to the body
             document.body.appendChild(clone);
@@ -1515,19 +1532,20 @@
             
             // Get the hero logo's position and size
             const heroRect = heroLogo.getBoundingClientRect();
+            const heroStyles = window.getComputedStyle(heroLogo);
             
             // After a brief delay, animate the clone to the hero logo's style and position
             setTimeout(() => {
-                clone.style.top = `${heroRect.top}px`;
-                clone.style.left = `${heroRect.left}px`;
+                clone.style.top = `${heroRect.top + window.scrollY}px`;
+                clone.style.left = `${heroRect.left + window.scrollX}px`;
                 clone.style.width = `${heroRect.width}px`;
                 clone.style.height = `${heroRect.height}px`;
                 clone.style.color = '#fff'; // Fill the logo with white
                 clone.style.webkitTextStroke = '0';
                 clone.style.textStroke = '0';
-                clone.style.fontSize = window.getComputedStyle(heroLogo).fontSize;
-                clone.style.fontFamily = window.getComputedStyle(heroLogo).fontFamily;
-                clone.style.letterSpacing = window.getComputedStyle(heroLogo).letterSpacing;
+                clone.style.fontSize = heroStyles.fontSize;
+                clone.style.fontFamily = heroStyles.fontFamily;
+                clone.style.letterSpacing = heroStyles.letterSpacing;
             }, 50);
             
             // After the transition, remove the clone and show the hero logo
@@ -1536,6 +1554,15 @@
                 document.body.removeChild(clone);
                 // Hide the loading screen
                 document.getElementById('loading-screen').classList.add('hidden');
+                
+                // Show other hero content with slight delay
+                setTimeout(() => {
+                    document.querySelectorAll('.hero-content .fade-in').forEach(el => {
+                        if (el.id !== 'hero-logo') {
+                            el.classList.add('appear');
+                        }
+                    });
+                }, 300);
             });
         }
 
