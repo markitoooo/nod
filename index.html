@@ -65,6 +65,121 @@
             letter-spacing: 0.5px;
         }
         
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .logo-outline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 8rem;
+            color: transparent;
+            -webkit-text-stroke: 2px #fff;
+            text-stroke: 2px #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'TAN Nimbus', serif;
+            letter-spacing: 3px;
+        }
+        
+        .logo-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            font-size: 8rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'TAN Nimbus', serif;
+            letter-spacing: 3px;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #1a6ea0, #0a3d62);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            animation: fillWater 2.5s ease-in-out forwards;
+        }
+        
+        @keyframes fillWater {
+            0% {
+                height: 0%;
+                background: linear-gradient(to bottom, #1a6ea0 0%, #0a3d62 0%);
+            }
+            25% {
+                height: 25%;
+                background: linear-gradient(to bottom, #1a6ea0 25%, #0a3d62 0%);
+            }
+            50% {
+                height: 50%;
+                background: linear-gradient(to bottom, #1a6ea0 50%, #0a3d62 0%);
+            }
+            75% {
+                height: 75%;
+                background: linear-gradient(to bottom, #1a6ea0 75%, #0a3d62 0%);
+            }
+            100% {
+                height: 100%;
+                background: linear-gradient(to bottom, #1a6ea0 100%, #0a3d62 0%);
+            }
+        }
+        
+        .water-ripple {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 10px;
+            background: rgba(26, 110, 160, 0.6);
+            border-radius: 50%;
+            animation: ripple 2.5s ease-in-out infinite;
+        }
+        
+        @keyframes ripple {
+            0% {
+                width: 120%;
+                opacity: 0.8;
+            }
+            50% {
+                width: 140%;
+                opacity: 0.4;
+            }
+            100% {
+                width: 120%;
+                opacity: 0.8;
+            }
+        }
+        
         /* Layout */
         section {
             padding: 6rem 2rem;
@@ -365,8 +480,8 @@
             background: #ddd;
         }
         
-        /* Booking System Overlay - Redesigned */
-        .booking-overlay {
+        /* Spa Modal */
+        .spa-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -380,245 +495,63 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
+            padding: 2rem;
         }
         
-        .booking-overlay.active {
+        .spa-modal.active {
             opacity: 1;
             visibility: visible;
         }
         
-        .booking-system {
+        .spa-modal-content {
             background: #000;
             border: 1px solid #fff;
-            padding: 3rem;
             width: 90%;
-            max-width: 800px;
-            position: relative;
+            max-width: 1000px;
             max-height: 90vh;
             overflow-y: auto;
-        }
-        
-        .close-booking {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-        
-        .close-booking:hover {
-            opacity: 0.7;
-        }
-        
-        .booking-system h3 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-        
-        .booking-progress {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
             position: relative;
         }
         
-        .booking-progress::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #333;
-            z-index: 1;
+        .spa-modal-hero {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
         
-        .progress-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
+        .spa-modal-info {
+            padding: 3rem;
         }
         
-        .step-number {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #333;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .step-number.active {
-            background: #fff;
-            color: #000;
-        }
-        
-        .step-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .booking-form {
-            display: none;
-        }
-        
-        .booking-form.active {
-            display: block;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 1rem;
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #aaa;
-        }
-        
-        select.form-control {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1em;
-        }
-        
-        .form-row {
+        .spa-services-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        .booking-navigation {
-            display: flex;
-            justify-content: space-between;
+            gap: 3rem;
             margin-top: 2rem;
         }
         
-        .nav-btn {
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
+        .spa-service h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
         
-        .nav-btn:hover {
-            background: #fff;
-            color: #000;
-        }
-        
-        .nav-btn.next {
-            background: #fff;
-            color: #000;
-        }
-        
-        .nav-btn.next:hover {
-            background: #ddd;
-        }
-        
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .nav-btn:disabled:hover {
-            background: transparent;
-            color: #fff;
-        }
-        
-        .suite-options {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+        .spa-service ul {
+            list-style: none;
             margin-top: 1rem;
         }
         
-        .suite-option {
-            border: 1px solid #fff;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .spa-service li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
         }
         
-        .suite-option:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .suite-option.selected {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #aaa;
-        }
-        
-        .suite-option h4 {
-            margin-bottom: 0.5rem;
-        }
-        
-        .suite-option p {
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .suite-price {
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-        
-        .confirmation-details {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .confirmation-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-        
-        .confirmation-row:last-child {
-            margin-bottom: 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            padding-top: 0.5rem;
-            font-weight: 600;
+        .spa-service li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #fff;
         }
         
         /* Two Column Section - One&Only Style */
@@ -817,6 +750,10 @@
             .suite-details-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .spa-services-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 992px) {
@@ -851,10 +788,6 @@
                 left: 1rem;
                 font-size: 2rem;
             }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
         }
         
         @media (max-width: 768px) {
@@ -887,25 +820,6 @@
                 display: none;
             }
             
-            .booking-system {
-                padding: 2rem;
-            }
-            
-            .booking-progress {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-            
-            .booking-progress::before {
-                display: none;
-            }
-            
-            .progress-step {
-                flex-direction: row;
-                gap: 1rem;
-            }
-            
             .suite-gallery {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -928,12 +842,21 @@
                 padding: 5rem 1rem;
             }
             
-            .suite-modal-info {
+            .suite-modal-info, .spa-modal-info {
                 padding: 2rem;
             }
             
             .suite-gallery {
                 grid-template-columns: 1fr;
+            }
+            
+            .logo-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .logo-outline, .logo-fill {
+                font-size: 6rem;
             }
         }
         
@@ -951,7 +874,16 @@
     </style>
 </head>
 <body>
-    <!-- Vertical Logo - Will be positioned correctly with JavaScript -->
+    <!-- Loading Animation -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="logo-container">
+            <div class="logo-outline logo-font">NOD</div>
+            <div class="logo-fill logo-font">NOD</div>
+            <div class="water-ripple"></div>
+        </div>
+    </div>
+
+    <!-- Vertical Logo -->
     <a href="#" class="vertical-logo logo-font">NOD</a>
 
     <!-- Header & Navigation -->
@@ -996,7 +928,7 @@
                     <h2>In-Room Spa & Dining</h2>
                     <p>Experience ultimate relaxation with our exclusive in-room spa services. Our skilled therapists bring the spa experience directly to your suite, offering a range of treatments designed to rejuvenate mind and body.</p>
                     <p>Complement your relaxation with our gourmet in-room dining. Our chefs craft exquisite meals using locally-sourced ingredients, delivering a culinary journey that satisfies all your senses without ever leaving your private sanctuary.</p>
-                    <button class="explore-btn">Explore Services</button>
+                    <button class="explore-btn" id="open-spa-modal">Explore Services</button>
                 </div>
             </div>
         </div>
@@ -1129,6 +1061,48 @@
                         <button class="modal-book-btn" id="modal-book-btn">Book This Suite</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spa Modal -->
+    <div class="spa-modal" id="spa-modal">
+        <div class="spa-modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="spa-modal-hero" style="background-image: url('spa.png');"></div>
+            <div class="spa-modal-info">
+                <h2>In-Room Spa & Dining Services</h2>
+                <p>Experience the ultimate in relaxation and culinary excellence without leaving the comfort of your suite. Our dedicated team brings luxury directly to you.</p>
+                
+                <div class="spa-services-grid">
+                    <div class="spa-service">
+                        <h3>Spa Treatments</h3>
+                        <p>Our skilled therapists offer a range of treatments in the privacy of your suite:</p>
+                        <ul>
+                            <li>Aromatherapy Massage</li>
+                            <li>Hot Stone Therapy</li>
+                            <li>Reflexology Sessions</li>
+                            <li>Custom Facial Treatments</li>
+                            <li>Couples Massage Packages</li>
+                            <li>Ayurvedic Treatments</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="spa-service">
+                        <h3>In-Room Dining</h3>
+                        <p>Our culinary team creates exceptional dining experiences:</p>
+                        <ul>
+                            <li>Breakfast in Bed</li>
+                            <li>Private Chef Experiences</li>
+                            <li>Romantic Candlelit Dinners</li>
+                            <li>Customized Menu Planning</li>
+                            <li>Wine & Champagne Service</li>
+                            <li>24-Hour Room Service</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <button class="modal-book-btn" style="margin-top: 3rem;">Book Spa Services</button>
             </div>
         </div>
     </div>
@@ -1315,6 +1289,13 @@
     </div>
 
     <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-screen').classList.add('hidden');
+            }, 3000); // Match animation duration
+        });
+
         // Suite data for modals
         const suiteData = {
             'ocean-vista': {
@@ -1342,7 +1323,7 @@
                     'Turndown service',
                     'Beach towels and amenities'
                 ],
-                gallery: ['room2.png', 'room2.png', 'room2.png'] // Using same image for demo
+                gallery: ['room2.png', 'room2.png', 'room2.png']
             },
             'horizon': {
                 title: 'Horizon Suite',
@@ -1492,8 +1473,10 @@
 
         // Suite Modal Functionality
         const suiteModal = document.getElementById('suite-modal');
-        const closeModalBtn = document.querySelector('.close-modal');
+        const spaModal = document.getElementById('spa-modal');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
         const viewSuiteBtns = document.querySelectorAll('.view-suite');
+        const openSpaModalBtn = document.getElementById('open-spa-modal');
         
         function openSuiteModal(suiteId) {
             const suite = suiteData[suiteId];
@@ -1551,12 +1534,22 @@
             document.body.style.overflow = 'hidden';
         }
         
+        function openSpaModal() {
+            spaModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
         function closeSuiteModal() {
             suiteModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
         
-        // Event listeners for suite modals
+        function closeSpaModal() {
+            spaModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Event listeners for modals
         viewSuiteBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const suiteId = this.getAttribute('data-suite');
@@ -1564,11 +1557,24 @@
             });
         });
         
-        closeModalBtn.addEventListener('click', closeSuiteModal);
+        openSpaModalBtn.addEventListener('click', openSpaModal);
+        
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                closeSuiteModal();
+                closeSpaModal();
+            });
+        });
         
         suiteModal.addEventListener('click', function(e) {
             if (e.target === suiteModal) {
                 closeSuiteModal();
+            }
+        });
+        
+        spaModal.addEventListener('click', function(e) {
+            if (e.target === spaModal) {
+                closeSpaModal();
             }
         });
 
