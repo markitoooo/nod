@@ -74,6 +74,7 @@
             letter-spacing: 3px;
             margin-bottom: 2rem;
             display: block;
+            transition: all 0.3s ease;
         }
         
         .loading-bar-container {
@@ -298,7 +299,6 @@
             color: #fff;
             font-size: 1.5rem;
             cursor: pointer;
-            z-index: 10;
             transition: opacity 0.3s ease;
         }
         
@@ -873,6 +873,14 @@
             transform: translateY(0);
         }
 
+        /* Animation for the logo transition */
+        .logo-transition {
+            position: fixed;
+            z-index: 10000;
+            pointer-events: none;
+            transition: all 1s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             /* Video aspect ratio adjustment for mobile */
@@ -1074,7 +1082,7 @@
     <!-- Minimal Loading Animation -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-container">
-            <div class="logo-outline">NOD</div>
+            <div class="logo-outline" id="loading-logo">NOD</div>
             <div class="loading-bar-container">
                 <div class="loading-bar"></div>
             </div>
@@ -1102,7 +1110,7 @@
         </div>
         <div class="video-overlay"></div>
         <div class="hero-content">
-            <h1 class="fade-in logo-font">NOD</h1>
+            <h1 class="fade-in logo-font" id="hero-logo" style="opacity:0">NOD</h1>
             <p class="fade-in">A Private Escape by the Sea</p>
             <button class="explore-btn fade-in" id="open-booking">Check Availability</button>
         </div>
@@ -1444,12 +1452,92 @@
     </div>
 
     <script>
-        // Minimal Loading Animation
-        window.addEventListener('load', function() {
-            setTimeout(function() {
+        // Font cycling for loading screen
+        const fonts = [
+            'Arial, sans-serif',
+            'Georgia, serif',
+            'Verdana, sans-serif',
+            'Times New Roman, serif',
+            'Courier New, monospace',
+            'Impact, sans-serif',
+            'Trebuchet MS, sans-serif',
+            'Comic Sans MS, cursive',
+            'Palatino Linotype, serif',
+            'Lucida Sans Unicode, sans-serif',
+            'TAN Nimbus, serif' // Final font
+        ];
+
+        let currentFontIndex = 0;
+        const loadingLogo = document.getElementById('loading-logo');
+        
+        // Start font cycling
+        const fontInterval = setInterval(() => {
+            loadingLogo.style.fontFamily = fonts[currentFontIndex];
+            currentFontIndex++;
+            
+            if (currentFontIndex >= fonts.length) {
+                clearInterval(fontInterval);
+                // Once font cycling is done, start the logo transition
+                startLogoTransition();
+            }
+        }, 180); // Change font every 180ms
+
+        // Logo transition function
+        function startLogoTransition() {
+            const heroLogo = document.getElementById('hero-logo');
+            
+            // Get the position and size of the loading logo
+            const loadingRect = loadingLogo.getBoundingClientRect();
+            
+            // Create a clone of the loading logo
+            const clone = loadingLogo.cloneNode(true);
+            clone.id = 'logo-clone';
+            clone.classList.add('logo-transition');
+            clone.style.position = 'fixed';
+            clone.style.top = `${loadingRect.top}px`;
+            clone.style.left = `${loadingRect.left}px`;
+            clone.style.width = `${loadingRect.width}px`;
+            clone.style.height = `${loadingRect.height}px`;
+            clone.style.margin = '0';
+            clone.style.color = 'transparent';
+            clone.style.webkitTextStroke = '2px #fff';
+            clone.style.textStroke = '2px #fff';
+            clone.style.fontSize = window.getComputedStyle(loadingLogo).fontSize;
+            clone.style.fontFamily = window.getComputedStyle(loadingLogo).fontFamily;
+            clone.style.letterSpacing = window.getComputedStyle(loadingLogo).letterSpacing;
+            clone.style.zIndex = '10000';
+            
+            // Add the clone to the body
+            document.body.appendChild(clone);
+            
+            // Hide the original loading logo
+            loadingLogo.style.opacity = '0';
+            
+            // Get the hero logo's position and size
+            const heroRect = heroLogo.getBoundingClientRect();
+            
+            // After a brief delay, animate the clone to the hero logo's style and position
+            setTimeout(() => {
+                clone.style.top = `${heroRect.top}px`;
+                clone.style.left = `${heroRect.left}px`;
+                clone.style.width = `${heroRect.width}px`;
+                clone.style.height = `${heroRect.height}px`;
+                clone.style.color = '#fff'; // Fill the logo with white
+                clone.style.webkitTextStroke = '0';
+                clone.style.textStroke = '0';
+                clone.style.fontSize = window.getComputedStyle(heroLogo).fontSize;
+                clone.style.fontFamily = window.getComputedStyle(heroLogo).fontFamily;
+                clone.style.letterSpacing = window.getComputedStyle(heroLogo).letterSpacing;
+            }, 50);
+            
+            // After the transition, remove the clone and show the hero logo
+            clone.addEventListener('transitionend', () => {
+                heroLogo.style.opacity = '1';
+                document.body.removeChild(clone);
+                // Hide the loading screen
                 document.getElementById('loading-screen').classList.add('hidden');
-            }, 2000);
-        });
+            });
+        }
 
         // Rest of your JavaScript remains exactly the same
         const suiteData = {
