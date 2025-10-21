@@ -226,6 +226,145 @@
             color: #000;
         }
         
+        /* Suite Detail Modal */
+        .suite-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            padding: 2rem;
+        }
+        
+        .suite-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .suite-modal-content {
+            background: #000;
+            border: 1px solid #fff;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            opacity: 0.7;
+        }
+        
+        .suite-modal-hero {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .suite-modal-info {
+            padding: 3rem;
+        }
+        
+        .suite-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        
+        .suite-modal-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .suite-details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+        
+        .suite-features h3, .suite-amenities h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .features-list, .amenities-list {
+            list-style: none;
+        }
+        
+        .features-list li, .amenities-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .features-list li:before, .amenities-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #fff;
+        }
+        
+        .suite-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            height: 150px;
+            background: #333;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal-book-btn {
+            background: #fff;
+            border: 1px solid #fff;
+            color: #000;
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            margin-top: 2rem;
+            width: 100%;
+        }
+        
+        .modal-book-btn:hover {
+            background: #ddd;
+        }
+        
         /* Booking System Overlay - Redesigned */
         .booking-overlay {
             position: fixed;
@@ -583,6 +722,7 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .view-suite:hover {
@@ -673,6 +813,10 @@
             .two-col-content {
                 gap: 3rem;
             }
+            
+            .suite-details-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 992px) {
@@ -761,6 +905,10 @@
                 flex-direction: row;
                 gap: 1rem;
             }
+            
+            .suite-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 576px) {
@@ -778,6 +926,14 @@
             
             .two-col-section {
                 padding: 5rem 1rem;
+            }
+            
+            .suite-modal-info {
+                padding: 2rem;
+            }
+            
+            .suite-gallery {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -856,7 +1012,7 @@
                     <div class="suite-info">
                         <h3 class="suite-name">Ocean Vista Suite</h3>
                         <p class="suite-description">Panoramic ocean views with a spacious terrace and private infinity pool.</p>
-                        <a href="suite-ocean-vista.html" class="view-suite" target="_blank">View Suite</a>
+                        <a class="view-suite" data-suite="ocean-vista">View Suite</a>
                     </div>
                 </div>
                 <div class="suite-card fade-in">
@@ -864,7 +1020,7 @@
                     <div class="suite-info">
                         <h3 class="suite-name">Horizon Suite</h3>
                         <p class="suite-description">Direct beach access with sunset views and a secluded garden.</p>
-                        <a href="suite-horizon.html" class="view-suite" target="_blank">View Suite</a>
+                        <a class="view-suite" data-suite="horizon">View Suite</a>
                     </div>
                 </div>
                 <div class="suite-card fade-in">
@@ -872,7 +1028,7 @@
                     <div class="suite-info">
                         <h3 class="suite-name">Sunset Pavilion</h3>
                         <p class="suite-description">Open-air living space with 180-degree ocean vistas.</p>
-                        <a href="suite-sunset.html" class="view-suite" target="_blank">View Suite</a>
+                        <a class="view-suite" data-suite="sunset">View Suite</a>
                     </div>
                 </div>
                 <div class="suite-card fade-in">
@@ -880,7 +1036,7 @@
                     <div class="suite-info">
                         <h3 class="suite-name">Serenity Suite</h3>
                         <p class="suite-description">Tranquil retreat with private meditation garden and outdoor shower.</p>
-                        <a href="suite-serenity.html" class="view-suite" target="_blank">View Suite</a>
+                        <a class="view-suite" data-suite="serenity">View Suite</a>
                     </div>
                 </div>
                 <div class="suite-card fade-in">
@@ -888,7 +1044,7 @@
                     <div class="suite-info">
                         <h3 class="suite-name">Tranquility Villa</h3>
                         <p class="suite-description">Secluded villa with private pool and direct beach access.</p>
-                        <a href="suite-tranquility.html" class="view-suite" target="_blank">View Suite</a>
+                        <a class="view-suite" data-suite="tranquility">View Suite</a>
                     </div>
                 </div>
             </div>
@@ -936,6 +1092,46 @@
             </div>
         </div>
     </footer>
+
+    <!-- Suite Detail Modals -->
+    <div class="suite-modal" id="suite-modal">
+        <div class="suite-modal-content">
+            <button class="close-modal">&times;</button>
+            <div class="suite-modal-hero" id="modal-hero"></div>
+            <div class="suite-modal-info">
+                <div class="suite-modal-header">
+                    <div>
+                        <h2 id="modal-title">Suite Title</h2>
+                        <p id="modal-description">Suite description</p>
+                    </div>
+                    <div class="suite-modal-price" id="modal-price">$0 per night</div>
+                </div>
+                
+                <div class="suite-details-grid">
+                    <div class="suite-features">
+                        <h3>Suite Features</h3>
+                        <ul class="features-list" id="modal-features">
+                            <!-- Features will be populated by JavaScript -->
+                        </ul>
+                        
+                        <h3 style="margin-top: 2rem;">Gallery</h3>
+                        <div class="suite-gallery" id="modal-gallery">
+                            <!-- Gallery items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="suite-amenities">
+                        <h3>Amenities</h3>
+                        <ul class="amenities-list" id="modal-amenities">
+                            <!-- Amenities will be populated by JavaScript -->
+                        </ul>
+                        
+                        <button class="modal-book-btn" id="modal-book-btn">Book This Suite</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Booking System Overlay -->
     <div class="booking-overlay" id="booking-overlay">
@@ -1119,6 +1315,145 @@
     </div>
 
     <script>
+        // Suite data for modals
+        const suiteData = {
+            'ocean-vista': {
+                title: 'Ocean Vista Suite',
+                description: 'Panoramic ocean views with private infinity pool and spacious terrace',
+                price: '$850 per night',
+                heroImage: 'room2.png',
+                features: [
+                    'Private infinity pool with ocean view',
+                    'Spacious terrace with lounge area',
+                    'King-size bed with premium linens',
+                    'Separate living area',
+                    'En-suite marble bathroom with rain shower',
+                    '2-4 guests capacity',
+                    'Direct seafront access',
+                    'Personalized butler service'
+                ],
+                amenities: [
+                    'Complimentary Wi-Fi',
+                    'Smart TV with streaming services',
+                    'Mini-bar with local specialties',
+                    'Nespresso coffee machine',
+                    '24-hour in-room dining',
+                    'Daily housekeeping',
+                    'Turndown service',
+                    'Beach towels and amenities'
+                ],
+                gallery: ['room2.png', 'room2.png', 'room2.png'] // Using same image for demo
+            },
+            'horizon': {
+                title: 'Horizon Suite',
+                description: 'Direct beach access with sunset views and secluded garden',
+                price: '$950 per night',
+                heroImage: 'room3.png',
+                features: [
+                    'Private garden with outdoor seating',
+                    'Direct beach access',
+                    'Sunset viewing deck',
+                    'King-size canopy bed',
+                    'Walk-in wardrobe',
+                    '2-4 guests capacity',
+                    'Outdoor rain shower',
+                    'Personal concierge service'
+                ],
+                amenities: [
+                    'High-speed Wi-Fi',
+                    'Entertainment system with surround sound',
+                    'Complimentary minibar',
+                    'French press coffee setup',
+                    'In-room spa treatment area',
+                    'Evening turndown service',
+                    'Beach bag with essentials',
+                    'Yoga mats and meditation cushions'
+                ],
+                gallery: ['room3.png', 'room3.png', 'room3.png']
+            },
+            'sunset': {
+                title: 'Sunset Pavilion',
+                description: 'Open-air living space with 180-degree ocean vistas',
+                price: '$1,100 per night',
+                heroImage: 'room4.png',
+                features: [
+                    'Open-air pavilion design',
+                    '180-degree ocean views',
+                    'Private dipping pool',
+                    'Outdoor dining area',
+                    'Four-poster bed with mosquito net',
+                    '2-4 guests capacity',
+                    'Seamless indoor-outdoor living',
+                    'Private path to beach'
+                ],
+                amenities: [
+                    'Premium Wi-Fi connectivity',
+                    'Outdoor sound system',
+                    'Wine cooler with selection',
+                    'Professional coffee station',
+                    'Outdoor kitchenette',
+                    'Twice-daily housekeeping',
+                    'Complimentary sunset cocktails',
+                    'Beach service with setup'
+                ],
+                gallery: ['room4.png', 'room4.png', 'room4.png']
+            },
+            'serenity': {
+                title: 'Serenity Suite',
+                description: 'Tranquil retreat with private meditation garden and outdoor shower',
+                price: '$1,250 per night',
+                heroImage: 'room5.png',
+                features: [
+                    'Private meditation garden',
+                    'Outdoor bamboo shower',
+                    'Japanese-style soaking tub',
+                    'Zen-inspired interior design',
+                    'Sound-proofed walls',
+                    '2 guests capacity',
+                    'Private yoga platform',
+                    'Water feature in garden'
+                ],
+                amenities: [
+                    'Wellness-focused minibar',
+                    'Aromatherapy diffuser',
+                    'Selection of meditation aids',
+                    'Herbal tea collection',
+                    'Yoga equipment available',
+                    'Twice-daily mindfulness service',
+                    'Complimentary wellness consultation',
+                    'Organic bathroom amenities'
+                ],
+                gallery: ['room5.png', 'room5.png', 'room5.png']
+            },
+            'tranquility': {
+                title: 'Tranquility Villa',
+                description: 'Secluded villa with private pool and direct beach access',
+                price: '$1,500 per night',
+                heroImage: 'room6.png',
+                features: [
+                    'Private 10m swimming pool',
+                    'Direct private beach access',
+                    'Two-bedroom villa layout',
+                    'Full kitchen and dining area',
+                    'Outdoor living space with fire pit',
+                    '4-6 guests capacity',
+                    'Private parking',
+                    'Dedicated villa host'
+                ],
+                amenities: [
+                    'Full kitchen with appliances',
+                    'Dining area for 6 guests',
+                    'Entertainment system in both bedrooms',
+                    'Private bar setup available',
+                    'Daily grocery stocking service',
+                    'Private chef available',
+                    'Complimentary bicycle rental',
+                    'Beach equipment and toys'
+                ],
+                gallery: ['room6.png', 'room6.png', 'room6.png']
+            }
+        };
+
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -1154,6 +1489,88 @@
 
         // Initialize vertical logo position
         controlVerticalLogo();
+
+        // Suite Modal Functionality
+        const suiteModal = document.getElementById('suite-modal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const viewSuiteBtns = document.querySelectorAll('.view-suite');
+        
+        function openSuiteModal(suiteId) {
+            const suite = suiteData[suiteId];
+            if (!suite) return;
+            
+            // Populate modal with suite data
+            document.getElementById('modal-title').textContent = suite.title;
+            document.getElementById('modal-description').textContent = suite.description;
+            document.getElementById('modal-price').textContent = suite.price;
+            document.getElementById('modal-hero').style.backgroundImage = `url('${suite.heroImage}')`;
+            
+            // Populate features
+            const featuresList = document.getElementById('modal-features');
+            featuresList.innerHTML = '';
+            suite.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+            
+            // Populate amenities
+            const amenitiesList = document.getElementById('modal-amenities');
+            amenitiesList.innerHTML = '';
+            suite.amenities.forEach(amenity => {
+                const li = document.createElement('li');
+                li.textContent = amenity;
+                amenitiesList.appendChild(li);
+            });
+            
+            // Populate gallery
+            const gallery = document.getElementById('modal-gallery');
+            gallery.innerHTML = '';
+            suite.gallery.forEach(image => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.style.backgroundImage = `url('${image}')`;
+                gallery.appendChild(div);
+            });
+            
+            // Set up book button
+            document.getElementById('modal-book-btn').onclick = function() {
+                closeSuiteModal();
+                openBooking();
+                // Auto-select this suite in booking
+                setTimeout(() => {
+                    const suiteOption = document.querySelector(`.suite-option[data-suite="${suiteId}"]`);
+                    if (suiteOption) {
+                        suiteOption.click();
+                        showStep(2);
+                    }
+                }, 500);
+            };
+            
+            suiteModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeSuiteModal() {
+            suiteModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Event listeners for suite modals
+        viewSuiteBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const suiteId = this.getAttribute('data-suite');
+                openSuiteModal(suiteId);
+            });
+        });
+        
+        closeModalBtn.addEventListener('click', closeSuiteModal);
+        
+        suiteModal.addEventListener('click', function(e) {
+            if (e.target === suiteModal) {
+                closeSuiteModal();
+            }
+        });
 
         // Booking overlay functionality
         const openBookingBtn = document.getElementById('open-booking');
