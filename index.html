@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOD - A Private Escape by the Sea</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* Base Styles & Reset */
         * {
@@ -76,7 +76,7 @@
             margin: 0 auto;
         }
         
-        /* Header & Navigation */
+        /* Header & Navigation - One&Only Style */
         header {
             position: fixed;
             top: 0;
@@ -84,12 +84,14 @@
             width: 100%;
             z-index: 1000;
             padding: 1.5rem 2rem;
-            transition: background-color 0.3s ease;
+            transition: all 0.4s ease;
+            background: transparent;
         }
         
         header.scrolled {
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
         }
         
         nav {
@@ -99,10 +101,11 @@
         }
         
         .logo {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #fff;
             text-decoration: none;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            z-index: 1001;
         }
         
         .nav-links {
@@ -111,15 +114,16 @@
         }
         
         .nav-links li {
-            margin-left: 2rem;
+            margin-left: 2.5rem;
         }
         
         .nav-links a {
             color: #fff;
             text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
             transition: opacity 0.3s ease;
+            text-transform: uppercase;
         }
         
         .nav-links a:hover {
@@ -130,11 +134,12 @@
             background: transparent;
             border: 1px solid #fff;
             color: #fff;
-            padding: 0.7rem 1.5rem;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            padding: 0.7rem 1.8rem;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-transform: uppercase;
         }
         
         .book-btn:hover {
@@ -146,101 +151,96 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
         }
         
-    <!-- Hero Section -->
-<section class="hero" id="home">
-    <video autoplay muted loop class="hero-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-coming-to-the-beach-5016-large.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="video-fallback"></div>
-    <div class="hero-content">
-        <img src="nod-logo.png" alt="NOD" class="hero-logo fade-in">
-        <p class="fade-in">A Private Escape by the Sea</p>
-        <button class="book-btn fade-in" id="hero-book-btn">Book Your Stay</button>
-    </div>
-</section>
+        /* Hero Section - One&Only Style */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
         
-        /* Booking Overlay */
-        .booking-overlay {
-            position: fixed;
+        .hero-video {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            object-fit: cover;
+            z-index: -1;
         }
         
-        .booking-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+            padding: 0 2rem;
         }
         
-        .booking-form {
-            background: #000;
-            border: 1px solid #fff;
-            padding: 3rem;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-        }
-        
-        .close-booking {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .form-group {
+        .hero h1 {
+            font-size: 5.5rem;
             margin-bottom: 1.5rem;
+            letter-spacing: 4px;
+            line-height: 1.1;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             letter-spacing: 1px;
         }
         
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            background: transparent;
-            border: 1px solid #fff;
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
         }
         
-        .check-availability {
-            width: 100%;
-            padding: 1rem;
-            background: #fff;
-            color: #000;
-            border: none;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
         }
         
-        .check-availability:hover {
-            background: #ddd;
+        /* Section Titles - One&Only Style */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
         }
         
-        /* About Section */
+        .section-title h2 {
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* About Section - One&Only Style */
         .about {
             background: #000;
             padding: 8rem 2rem;
@@ -249,46 +249,69 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
         }
         
         .about-image {
             width: 100%;
-            height: 500px;
+            height: 600px;
             background: #333;
             background-size: cover;
             background-position: center;
         }
         
         .about-text h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
         }
         
-        /* Suites Section */
+        .about-text p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .learn-more {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 5px;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .learn-more:hover {
+            padding-bottom: 8px;
+        }
+        
+        /* Suites Section - One&Only Style */
         .suites {
             background: #000;
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
         }
         
         .suites-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
         
         .suite-card {
             position: relative;
             overflow: hidden;
-            height: 400px;
+            height: 450px;
             background: #333;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
         
         .suite-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
         }
         
         .suite-image {
@@ -296,7 +319,7 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s ease;
         }
         
         .suite-card:hover .suite-image {
@@ -308,13 +331,20 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 2rem;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
         }
         
         .suite-name {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
+            letter-spacing: 1.5px;
+        }
+        
+        .suite-description {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
         }
         
         .view-suite {
@@ -323,16 +353,17 @@
             text-decoration: none;
             border-bottom: 1px solid #fff;
             padding-bottom: 2px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: opacity 0.3s ease;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
         
         .view-suite:hover {
-            opacity: 0.7;
+            padding-bottom: 5px;
         }
         
-        /* Experience Section */
+        /* Experience Section - One&Only Style */
         .experience {
             background: #000;
             padding: 8rem 2rem;
@@ -341,46 +372,137 @@
         .experience-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
         }
         
         .experience-image {
             width: 100%;
-            height: 500px;
+            height: 600px;
             background: #333;
             background-size: cover;
             background-position: center;
         }
         
         .experience-text h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
         }
         
-        /* Gallery Section */
+        .experience-text p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Dining Section - One&Only Style */
+        .dining {
+            background: #000;
+            padding: 8rem 2rem;
+        }
+        
+        .dining-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        
+        .dining-image {
+            width: 100%;
+            height: 600px;
+            background: #333;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dining-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        .dining-text p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Wellness Section - One&Only Style */
+        .wellness {
+            background: #000;
+            padding: 8rem 2rem;
+        }
+        
+        .wellness-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        
+        .wellness-image {
+            width: 100%;
+            height: 600px;
+            background: #333;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .wellness-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        .wellness-text p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Gallery Section - One&Only Style */
         .gallery {
             background: #000;
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
         }
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
         
         .gallery-item {
-            height: 250px;
+            height: 300px;
             background: #333;
             background-size: cover;
             background-position: center;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .gallery-item:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
         }
         
         /* Lightbox */
@@ -390,14 +512,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 3000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .lightbox.active {
@@ -408,6 +530,7 @@
         .lightbox-content {
             max-width: 90%;
             max-height: 90%;
+            position: relative;
         }
         
         .lightbox-image {
@@ -417,29 +540,88 @@
         
         .close-lightbox {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
+            top: -50px;
+            right: 0;
             background: none;
             border: none;
             color: #fff;
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
+            transition: opacity 0.3s ease;
         }
         
-        /* Contact Section */
+        .close-lightbox:hover {
+            opacity: 0.7;
+        }
+        
+        /* Contact Section - One&Only Style */
         .contact {
             background: #000;
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
         }
         
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        .contact-details {
+            margin-bottom: 3rem;
+        }
+        
+        .contact-details p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
         
         .contact-form .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #aaa;
+        }
+        
+        .submit-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #ddd;
         }
         
         .map {
@@ -450,23 +632,64 @@
             justify-content: center;
         }
         
-        /* Footer */
+        /* Footer - One&Only Style */
         footer {
             background: #000;
-            padding: 4rem 2rem 2rem;
+            padding: 5rem 2rem 2rem;
             border-top: 1px solid #333;
         }
         
         .footer-content {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 4rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            opacity: 0.7;
         }
         
         .social-icons {
             display: flex;
             gap: 1.5rem;
+            margin-top: 1.5rem;
         }
         
         .social-icons a {
@@ -481,20 +704,27 @@
         
         .copyright {
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #999;
             padding-top: 2rem;
             border-top: 1px solid #333;
+            letter-spacing: 1px;
         }
         
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .about-content, .experience-content, .dining-content, .wellness-content, .contact-content {
+                gap: 3rem;
+            }
+        }
+        
         @media (max-width: 992px) {
-            .about-content, .experience-content, .contact-content {
+            .about-content, .experience-content, .dining-content, .wellness-content, .contact-content {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 3rem;
             }
             
-            .about-image, .experience-image {
+            .about-image, .experience-image, .dining-image, .wellness-image {
                 height: 400px;
             }
             
@@ -505,19 +735,31 @@
             .hero h1 {
                 font-size: 4rem;
             }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            
+            .footer-links {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
         
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
-                background: rgba(0, 0, 0, 0.95);
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.98);
                 flex-direction: column;
-                padding: 2rem;
+                padding: 8rem 2rem 2rem;
                 text-align: center;
+                z-index: 1000;
             }
             
             .nav-links.active {
@@ -525,7 +767,7 @@
             }
             
             .nav-links li {
-                margin: 1rem 0;
+                margin: 1.5rem 0;
             }
             
             .mobile-menu {
@@ -544,7 +786,7 @@
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
             
-            .footer-content {
+            .footer-links {
                 flex-direction: column;
                 gap: 2rem;
             }
@@ -552,7 +794,7 @@
         
         @media (max-width: 576px) {
             section {
-                padding: 4rem 1rem;
+                padding: 5rem 1rem;
             }
             
             .hero {
@@ -563,20 +805,20 @@
                 font-size: 2.5rem;
             }
             
-            .about, .experience {
-                padding: 4rem 1rem;
+            .about, .experience, .dining, .wellness, .contact {
+                padding: 5rem 1rem;
             }
             
-            .booking-form {
-                padding: 2rem 1.5rem;
+            .section-title h2 {
+                font-size: 2.2rem;
             }
         }
         
         /* Animation Classes */
         .fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         
         .fade-in.appear {
@@ -596,6 +838,78 @@
             background-position: center;
             z-index: -1;
         }
+        
+        /* Booking Overlay - One&Only Style */
+        .booking-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .booking-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .booking-form {
+            background: #000;
+            border: 1px solid #fff;
+            padding: 3rem;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .close-booking {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .close-booking:hover {
+            opacity: 0.7;
+        }
+        
+        .booking-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        
+        .check-availability {
+            width: 100%;
+            padding: 1.2rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .check-availability:hover {
+            background: #ddd;
+        }
     </style>
 </head>
 <body>
@@ -608,6 +922,8 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#suites">Suites</a></li>
                 <li><a href="#experience">Experiences</a></li>
+                <li><a href="#dining">Dining</a></li>
+                <li><a href="#wellness">Wellness</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button class="book-btn" id="open-booking">Book Now</button></li>
@@ -628,9 +944,258 @@
         <div class="hero-content">
             <h1 class="fade-in logo-font">NOD</h1>
             <p class="fade-in">A Private Escape by the Sea</p>
-            <button class="book-btn fade-in" id="hero-book-btn">Book Your Stay</button>
+            <button class="book-btn fade-in" id="hero-book-btn">Discover NOD</button>
+        </div>
+        <div class="scroll-indicator">Scroll to Explore</div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2 class="logo-font">NOD</h2>
+                <p>An exclusive sanctuary where the sea meets serenity. Six meticulously designed seafront suites with private dipping pools.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="about-text fade-in">
+                    <h2>Private Coastal Sanctuary</h2>
+                    <p>NOD offers an intimate escape with just six meticulously designed seafront suites, each featuring private dipping pools and uninterrupted ocean views. Our philosophy is simple: provide unparalleled privacy, personalized service, and moments of pure tranquility.</p>
+                    <p>At NOD, every detail is curated to create an experience that resonates with your soul. From the architecture that harmonizes with the coastal landscape to the bespoke amenities that anticipate your every need.</p>
+                    <a href="#" class="learn-more">Discover More</a>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Suites Section -->
+    <section class="suites" id="suites">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Luxury Suites</h2>
+                <p>Six exclusive seafront suites, each with private dipping pools and bespoke amenities.</p>
+            </div>
+            <div class="suites-grid">
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Ocean Vista Suite</h3>
+                        <p class="suite-description">Panoramic ocean views with a spacious terrace and private infinity pool.</p>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1582582621959-48d27397dc69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Horizon Suite</h3>
+                        <p class="suite-description">Direct beach access with sunset views and a secluded garden.</p>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Sunset Pavilion</h3>
+                        <p class="suite-description">Open-air living space with 180-degree ocean vistas.</p>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Azure Retreat</h3>
+                        <p class="suite-description">Minimalist design with direct pool access from the bedroom.</p>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Tidal Haven</h3>
+                        <p class="suite-description">Secluded sanctuary with a meditation deck and outdoor shower.</p>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+                <div class="suite-card fade-in">
+                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="suite-info">
+                        <h3 class="suite-name">Coastal Sanctuary</h3>
+                        <p class="suite-description">Luxurious two-bedroom suite with a private chef's kitchen.</p>
+                        <a href="#" class="view-suite">View Suite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Unique Experiences</h2>
+                <p>Curated moments that linger in memory long after your stay.</p>
+            </div>
+            <div class="experience-content">
+                <div class="experience-text fade-in">
+                    <h2>Tailored Adventures</h2>
+                    <p>At NOD, we curate moments that linger in memory long after your stay. From private dining under the stars to bespoke wellness journeys, every experience is tailored to your desires.</p>
+                    <p>Our ocean-inspired spa treatments harness the healing power of the sea, while our culinary team crafts exquisite meals using locally sourced ingredients. Whether you seek adventure or tranquility, NOD provides the canvas for your perfect escape.</p>
+                    <a href="#" class="learn-more">Explore Experiences</a>
+                </div>
+                <div class="experience-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Section -->
+    <section class="dining" id="dining">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Culinary Excellence</h2>
+                <p>Exceptional dining experiences with locally sourced ingredients.</p>
+            </div>
+            <div class="dining-content">
+                <div class="dining-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="dining-text fade-in">
+                    <h2>Ocean-to-Table Dining</h2>
+                    <p>Our culinary philosophy celebrates the bounty of the sea and local terroir. Each dish tells a story of place and season, crafted by our talented chefs who transform the freshest ingredients into unforgettable culinary experiences.</p>
+                    <p>From intimate beachfront dinners to private chef experiences in your suite, every meal at NOD is a celebration of flavor, artistry, and connection.</p>
+                    <a href="#" class="learn-more">View Menus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wellness Section -->
+    <section class="wellness" id="wellness">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Wellness & Spa</h2>
+                <p>Rejuvenate mind, body, and spirit with our holistic wellness offerings.</p>
+            </div>
+            <div class="wellness-content">
+                <div class="wellness-text fade-in">
+                    <h2>Ocean-Inspired Wellness</h2>
+                    <p>Our wellness philosophy draws inspiration from the healing power of the sea. Each treatment is designed to restore balance and harmony, using marine-based ingredients and ancient techniques adapted for modern luxury.</p>
+                    <p>From sunrise yoga on the beach to bespoke spa journeys in private treatment rooms, NOD offers a sanctuary for complete rejuvenation.</p>
+                    <a href="#" class="learn-more">Discover Wellness</a>
+                </div>
+                <div class="wellness-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Gallery</h2>
+                <p>Discover the beauty of NOD through our visual journey.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1596394516093-9ba7a4c84c58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-lightbox">&times;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image">
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Contact Us</h2>
+                <p>Begin your journey to NOD. We look forward to welcoming you.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h2>Get In Touch</h2>
+                    <div class="contact-details">
+                        <p><strong>Address:</strong> Coastal Road, Private Beach<br>NOD Resort, 12345</p>
+                        <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                        <p><strong>Email:</strong> reservations@nodresort.com</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" rows="5"></textarea>
+                    </div>
+                    <button class="submit-btn">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo logo-font">NOD</a>
+                    <p>An exclusive sanctuary where the sea meets serenity.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Explore</h3>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#suites">Suites</a></li>
+                            <li><a href="#experience">Experiences</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Information</h3>
+                        <ul>
+                            <li><a href="#dining">Dining</a></li>
+                            <li><a href="#wellness">Wellness</a></li>
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NOD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Booking Overlay -->
     <div class="booking-overlay" id="booking-overlay">
@@ -657,155 +1222,6 @@
             <button class="check-availability">Check Availability</button>
         </div>
     </div>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                <div class="about-text fade-in">
-                    <h2 class="logo-font">NOD</h2>
-                    <p>An exclusive sanctuary where the sea meets serenity. NOD offers an intimate escape with just six meticulously designed seafront suites, each featuring private dipping pools and uninterrupted ocean views.</p>
-                    <p>Our philosophy is simple: provide unparalleled privacy, personalized service, and moments of pure tranquility. At NOD, every detail is curated to create an experience that resonates with your soul.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Suites Section -->
-    <section class="suites" id="suites">
-        <div class="container">
-            <h2 class="fade-in">Our Suites</h2>
-            <div class="suites-grid">
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Ocean Vista Suite</h3>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1582582621959-48d27397dc69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Horizon Suite</h3>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Sunset Pavilion</h3>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Azure Retreat</h3>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Tidal Haven</h3>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-                <div class="suite-card fade-in">
-                    <div class="suite-image" style="background-image: url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="suite-info">
-                        <h3 class="suite-name">Coastal Sanctuary</h3>
-                        <a href="#" class="view-suite">View Suite</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="experience" id="experience">
-        <div class="container">
-            <div class="experience-content">
-                <div class="experience-text fade-in">
-                    <h2 class="logo-font">Experiences</h2>
-                    <p>At NOD, we curate moments that linger in memory long after your stay. From private dining under the stars to bespoke wellness journeys, every experience is tailored to your desires.</p>
-                    <p>Our ocean-inspired spa treatments harness the healing power of the sea, while our culinary team crafts exquisite meals using locally sourced ingredients. Whether you seek adventure or tranquility, NOD provides the canvas for your perfect escape.</p>
-                </div>
-                <div class="experience-image fade-in" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <h2 class="fade-in">Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1596394516093-9ba7a4c84c58?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                <div class="gallery-item fade-in" style="background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <button class="close-lightbox">&times;</button>
-        <div class="lightbox-content">
-            <img src="" alt="" class="lightbox-image">
-        </div>
-    </div>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="fade-in">Contact Us</h2>
-            <div class="contact-content">
-                <div class="contact-form fade-in">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-control" rows="5"></textarea>
-                    </div>
-                    <button class="check-availability">Send Message</button>
-                </div>
-                <div class="map fade-in">
-                    <div style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center;">
-                        <p>Map Location</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <a href="#" class="logo logo-font">NOD</a>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 NOD. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
         // Header scroll effect
