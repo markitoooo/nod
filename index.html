@@ -155,7 +155,7 @@
             opacity: 0.8;
         }
         
-        /* Hero Section - With Booking System */
+        /* Hero Section - With Video Background */
         .hero {
             height: 100vh;
             display: flex;
@@ -166,15 +166,23 @@
             overflow: hidden;
         }
         
-        .hero-bg {
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1597074866923-dc0589150358?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
             z-index: -1;
         }
         
@@ -807,9 +815,13 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Video Background -->
     <section class="hero" id="home">
-        <div class="hero-bg"></div>
+        <video autoplay muted loop class="hero-video">
+            <source src="video nod 1st.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
         <div class="hero-content">
             <h1 class="fade-in logo-font">NOD</h1>
             <p class="fade-in">A Private Escape by the Sea</p>
