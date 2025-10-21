@@ -26,7 +26,7 @@
             font-weight: 400;
         }
         
-        /* TAN Nimbus Font - RESTORED */
+        /* TAN Nimbus Font */
         @font-face {
             font-family: 'TAN Nimbus';
             src: url('tan-nimbus.woff') format('woff');
@@ -41,6 +41,61 @@
             letter-spacing: 2px;
         }
         
+        /* Minimal Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loading-container {
+            text-align: center;
+        }
+        
+        .logo-outline {
+            font-size: 8rem;
+            color: transparent;
+            -webkit-text-stroke: 2px #fff;
+            text-stroke: 2px #fff;
+            font-family: 'TAN Nimbus', serif;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        
+        .loading-bar-container {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: #fff;
+            animation: load 2s ease-in-out forwards;
+        }
+        
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
         h1, h2, h3, h4 {
             font-weight: 500;
             letter-spacing: 1px;
@@ -64,104 +119,6 @@
             letter-spacing: 0.5px;
         }
         
-        /* PROPER Loading Animation */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .logo-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-        }
-        
-        .logo-outline {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            font-size: 8rem;
-            color: transparent;
-            -webkit-text-stroke: 2px #fff;
-            text-stroke: 2px #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'TAN Nimbus', serif;
-            letter-spacing: 3px;
-            z-index: 2;
-        }
-        
-        .water-fill {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0%;
-            background: linear-gradient(to top, #1a6ea0, #0a3d62);
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Playfair Display" font-size="120" fill="white">NOD</text></svg>');
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Playfair Display" font-size="120" fill="white">NOD</text></svg>');
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-            -webkit-mask-position: center;
-            mask-position: center;
-            animation: waterFill 2.5s ease-in-out forwards;
-            overflow: hidden;
-        }
-        
-        @keyframes waterFill {
-            0% { height: 0%; }
-            100% { height: 100%; }
-        }
-        
-        .bubbles-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        
-        .bubble {
-            position: absolute;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: bubbleRise 3s infinite ease-in;
-        }
-        
-        @keyframes bubbleRise {
-            0% {
-                transform: translateY(0) scale(0.5);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-200px) scale(1.2);
-                opacity: 0;
-            }
-        }
-        
-        /* Rest of your original CSS remains exactly the same */
         section {
             padding: 6rem 2rem;
             position: relative;
@@ -1020,13 +977,12 @@
                 grid-template-columns: 1fr;
             }
             
-            .logo-container {
-                width: 150px;
-                height: 150px;
-            }
-            
             .logo-outline {
                 font-size: 6rem;
+            }
+            
+            .loading-bar-container {
+                width: 150px;
             }
         }
         
@@ -1043,12 +999,13 @@
     </style>
 </head>
 <body>
-    <!-- PROPER Loading Animation -->
+    <!-- Minimal Loading Animation -->
     <div class="loading-screen" id="loading-screen">
-        <div class="logo-container">
-            <div class="logo-outline logo-font">NOD</div>
-            <div class="water-fill"></div>
-            <div class="bubbles-container" id="bubbles-container"></div>
+        <div class="loading-container">
+            <div class="logo-outline">NOD</div>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
         </div>
     </div>
 
@@ -1209,7 +1166,7 @@
         </div>
     </div>
 
-    <!-- Spa Modal - Dining removed -->
+    <!-- Spa Modal -->
     <div class="spa-modal" id="spa-modal">
         <div class="spa-modal-content">
             <button class="close-modal">&times;</button>
@@ -1415,28 +1372,14 @@
     </div>
 
     <script>
-        // PROPER Loading Animation
+        // Minimal Loading Animation
         window.addEventListener('load', function() {
-            const bubblesContainer = document.getElementById('bubbles-container');
-            
-            // Create realistic bubbles
-            for (let i = 0; i < 25; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                bubble.style.left = Math.random() * 100 + '%';
-                bubble.style.width = Math.random() * 15 + 5 + 'px';
-                bubble.style.height = bubble.style.width;
-                bubble.style.animationDelay = Math.random() * 2 + 's';
-                bubble.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                bubblesContainer.appendChild(bubble);
-            }
-            
             setTimeout(function() {
                 document.getElementById('loading-screen').classList.add('hidden');
-            }, 3000);
+            }, 2000);
         });
 
-        // Rest of your original JavaScript remains exactly the same
+        // Rest of your JavaScript remains exactly the same
         const suiteData = {
             'ocean-vista': {
                 title: 'Ocean Vista Suite',
